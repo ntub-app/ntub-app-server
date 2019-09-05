@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+django-extensions = "*"
+ipython = "*"
+
+[packages]
+django = "*"
+django-split-settings = "*"
+django-environ = "*"
+djangorestframework-simplejwt = "*"
+djangorestframework = "*"
+coreapi = "*"
+django-cors-headers = "*"
+
+[requires]
+python_version = "3.7"
