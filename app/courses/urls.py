@@ -13,21 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-from rest_framework.documentation import include_docs_urls
+from .views import ClassCourse, ClassCourseOptionsView
 
-from . import docs, versions
-
-
-api_urlpatterns = [
-    path('courses/', include('app.courses.urls')),
-]
 
 urlpatterns = [
-    path('v1/', include((api_urlpatterns, versions.v1))),
-
-    path('admin/', admin.site.urls),
-    path('docs/', include_docs_urls(**docs.config)),
+    path('class/options', ClassCourseOptionsView.as_view()),
+    path('class/<str:class_id>', ClassCourse.as_view()),
 ]

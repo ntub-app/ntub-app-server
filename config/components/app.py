@@ -15,6 +15,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'app.courses',
     'app.users',
 ]
 
