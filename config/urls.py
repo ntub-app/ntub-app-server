@@ -27,5 +27,5 @@ urlpatterns = [
     path('v1', include((api_urlpatterns, versions.v1))),
 
     path('admin/', admin.site.urls),
-    path('docs/', include_docs_urls(**docs.config))
+    path('docs/', include_docs_urls(**docs.config)),
 ]
