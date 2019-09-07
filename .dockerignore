@@ -1,8 +1,11 @@
-# OSX file
-.DS_Store
+# Git file
+.git/
 
 # Env files
 .env.docker
+
+# OSX file
+.DS_Store
 
 # Editor config
 .idea/
