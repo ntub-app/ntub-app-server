@@ -17,6 +17,7 @@ coreapi = "*"
 django-cors-headers = "*"
 requests = "*"
 beautifulsoup4 = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.7"
