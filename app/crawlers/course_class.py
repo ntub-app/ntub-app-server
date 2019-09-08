@@ -42,7 +42,12 @@ def get_class_course(class_id: str) -> list:
     result = []
     for row in soup.select('tbody tr'):
         time = to_dict(TIME_KEYS, row.select_one('th').strings)
-        classes = [to_dict(CLASS_KEYS, c.strings) for c in row.select('td')]
+        classes = []
+        for c in row.select('td'):
+            class_data = list(c.strings)
+            if len(class_data) > 3:  # Handle multiple teacher (EX. 專題)
+                class_data[1] = '、'.join(class_data[1::3])
+                class_data = class_data[:3]
+            classes.append(to_dict(CLASS_KEYS, class_data))
         result.append({**time, 'classes': classes})
-
     return result
