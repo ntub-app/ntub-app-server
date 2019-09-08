@@ -30,7 +30,6 @@ jobs:
             name: Copy docker-compose to server
             command: cat deploy/docker-compose.yml
 
-
 workflows:
   build-and-deploy:
     jobs:
