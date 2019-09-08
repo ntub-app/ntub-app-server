@@ -1,1 +1,37 @@
-#test
+version: '3'
+
+services:
+  django:
+    image: ntubapp/ntub-app-server:${DOCKER_TAG}
+    restart: always
+    volumes:
+      - django_log:/src/log
+      - django_media:/src/media
+      - django_static:/src/assets
+    environment:
+      SECRET_KEY: $SECRET_KEY
+      DEBUG: $DEBUG
+      MODE: $MODE
+      ALLOWED_HOSTS: $ALLOWED_HOSTS
+      DATABASE_URL: $DATABASE_URL
+      ACCESS_TOKEN_LIFETIME: $ACCESS_TOKEN_LIFETIME
+      REFRESH_TOKEN_LIFETIME: $REFRESH_TOKEN_LIFETIME
+      CORS_ORIGIN_WHITELIST: $CORS_ORIGIN_WHITELIST
+      API_SERVER: $API_SERVER
+    labels:
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:${DOMAIN}"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.redirect.entryPoint=https"
+    networks:
+      - web
+
+volumes:
+  django_log:
+  django_media:
+  django_static:
+
+networks:
+  web:
+    external: true
