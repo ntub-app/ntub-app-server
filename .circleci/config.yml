@@ -39,7 +39,7 @@ jobs:
                 "cd $PROJECT_ROOT && \
                 docker-compose pull && \
                 docker-compose up -d && \
-                docker rmi $(docker images -f 'dangling=true' -q)"
+                docker images -f 'dangling=true' -q | xargs -r docker rmi"
 
 workflows:
   version: 2
