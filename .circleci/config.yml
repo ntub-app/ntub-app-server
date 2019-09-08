@@ -26,9 +26,19 @@ jobs:
       machine: true
       steps:
         - checkout
+        - add_ssh_keys:
+            fingerprints:
+              - "4b:7a:f5:16:54:4a:18:5a:85:e8:1d:41:48:82:79:58"
+
         - run:
             name: Copy docker-compose to server
-            command: cat deploy/docker-compose.yml
+            command: |
+              scp -P $PORT deploy/docker-compose.yml $USER@$HOST:$PROJECT_ROOT
+              ssh -p $PORT $USER@$HOST << EOF
+              ls
+              pwd
+              whoami
+              EOF
 
 workflows:
   version: 2
