@@ -33,12 +33,13 @@ jobs:
       - run:
           name: Copy docker-compose to server
           command: |
-            scp -P $PORT deploy/docker-compose.yml $USER@$HOST:$PROJECT_ROOT
-            ssh -p $PORT $USER@$HOST << EOF
-            ls
-            pwd
-            whoami
-            EOF
+            cd deploy
+            scp -P $PORT docker-compose.yml $USER@$HOST:$PROJECT_ROOT
+            ssh -p $PORT $USER@$HOST \
+                "cd $PROJECT_ROOT && \
+                docker-compose pull && \
+                docker-compose up -d && \
+                docker rmi $(docker images -f 'dangling=true' -q)"
 
 workflows:
   version: 2
