@@ -24,7 +24,8 @@ RUN cp ./script/docker-entrypoint.sh /usr/local/bin/entrypoint && \
     pip3 install --no-cache-dir pipenv uwsgi && \
     pipenv install --system --deploy --ignore-pipfile -v && \
     \
-    apk del build-deps
+    apk del build-deps && \
+    rm -rf ~/.cache
 
 ENTRYPOINT [ "entrypoint" ]
 
