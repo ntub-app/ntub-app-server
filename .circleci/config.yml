@@ -13,14 +13,14 @@ jobs:
       - run:
           name: Build Docker
           command: |
-            docker build -t docker.arthurc.me/ntub-app-server:$CIRCLE_BRANCH .
-            docker tag docker.arthurc.me/ntub-app-server:$CIRCLE_BRANCH docker.arthurc.me/ntub-app-server:$CIRCLE_SHA1
+            docker build -t docker.arthurc.me/ntub-app/server:$CIRCLE_BRANCH .
+            docker tag docker.arthurc.me/ntub-app/server:$CIRCLE_BRANCH docker.arthurc.me/ntub-app/server:$CIRCLE_SHA1
 
       - run:
           name: Push to Docker Hub
           command: |
-            docker push docker.arthurc.me/ntub-app-server:$CIRCLE_BRANCH
-            docker push docker.arthurc.me/ntub-app-server:$CIRCLE_SHA1
+            docker push docker.arthurc.me/ntub-app/server:$CIRCLE_BRANCH
+            docker push docker.arthurc.me/ntub-app/server:$CIRCLE_SHA1
 
   deploy:
     machine: true
