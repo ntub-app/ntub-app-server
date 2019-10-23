@@ -8,19 +8,19 @@ jobs:
       - run:
           name: Login to Docker Hub
           command: |
-            echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+            echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin docker.arthurc.me
 
       - run:
           name: Build Docker
           command: |
-            docker build -t ntubapp/ntub-app-server:$CIRCLE_BRANCH .
-            docker tag ntubapp/ntub-app-server:$CIRCLE_BRANCH ntubapp/ntub-app-server:$CIRCLE_SHA1
+            docker build -t docker.arthurc.me/ntub-app-server:$CIRCLE_BRANCH .
+            docker tag docker.arthurc.me/ntub-app-server:$CIRCLE_BRANCH docker.arthurc.me/ntub-app-server:$CIRCLE_SHA1
 
       - run:
           name: Push to Docker Hub
           command: |
-            docker push ntubapp/ntub-app-server:$CIRCLE_BRANCH
-            docker push ntubapp/ntub-app-server:$CIRCLE_SHA1
+            docker push docker.arthurc.me/ntub-app-server:$CIRCLE_BRANCH
+            docker push docker.arthurc.me/ntub-app-server:$CIRCLE_SHA1
 
   deploy:
     machine: true
