@@ -16,10 +16,17 @@ RUN cp ./script/docker-entrypoint.sh /usr/local/bin/entrypoint && \
     apk add --update --no-cache --virtual build-deps \
         build-base linux-headers libc-dev \
         pcre-dev && \
+    \
     apk add --no-cache \
         libuuid pcre mailcap \
         musl-dev libxslt-dev libffi-dev \
-        jpeg-dev zlib-dev postgresql-dev && \
+        jpeg-dev zlib-dev postgresql-dev \
+        logrotate && \
+    \
+    cp ./deploy/django.logrotate.conf /etc/logrotate.d/django && \
+    echo -e "#\!bin/sh\nlogrotate -f /etc/logrotate.d/django" > /etc/periodic/daily/django-logrotate && \
+    chmod +x /etc/periodic/daily/django-logrotate && \
+    crond && \
     \
     pip3 install --no-cache-dir pipenv uwsgi && \
     pipenv install --system --deploy --ignore-pipfile -v && \
