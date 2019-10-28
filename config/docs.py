@@ -1,9 +1,7 @@
-from rest_framework.authentication import SessionAuthentication
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import AllowAny
 
 
 config = {
     'title': 'API Document',
-    'authentication_classes': [SessionAuthentication],
-    'permission_classes': [IsAdminUser],
+    'permission_classes': [AllowAny],
 }
