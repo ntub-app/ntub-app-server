@@ -26,7 +26,7 @@ RUN cp ./script/docker-entrypoint.sh /usr/local/bin/entrypoint && \
     cp ./deploy/django.logrotate.conf /etc/logrotate.d/django && \
     echo -e "#\!bin/sh\nlogrotate -f /etc/logrotate.d/django" > /etc/periodic/daily/django-logrotate && \
     chmod +x /etc/periodic/daily/django-logrotate && \
-    [[ -d ./log/archived ]] || mkdir -p ./log/archived && \
+    syslogd && \
     crond && \
     \
     pip3 install --no-cache-dir pipenv uwsgi && \

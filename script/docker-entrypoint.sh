@@ -39,4 +39,7 @@ python3 manage.py collectstatic --noinput
 echo "Migrating Database"
 python3 manage.py migrate
 
+echo "Make log dir"
+[[ -d ./log/archived ]] || mkdir -p ./log/archived
+
 exec "$@"
