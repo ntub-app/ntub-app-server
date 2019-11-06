@@ -42,4 +42,7 @@ python3 manage.py migrate
 echo "Make log dir"
 [[ -d ./log/archived ]] || mkdir -p ./log/archived
 
+echo "Run crontab"
+crond
+
 exec "$@"
